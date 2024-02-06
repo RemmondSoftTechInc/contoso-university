@@ -40,7 +40,7 @@ namespace ContosoUniversity.Common.Data
         public void Initialize()
         {
             InitializeContext();
-            InitializeSecureContext().Wait();
+            //InitializeSecureContext().Wait();
         }
 
         private void InitializeContext()
