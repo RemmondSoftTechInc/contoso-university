@@ -11,6 +11,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using AutoMapper;
 using ContosoUniversity.Data.DbContexts;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace ContosoUniversity.Api
 {
@@ -36,7 +37,7 @@ namespace ContosoUniversity.Api
                 .AddCustomizedMvc(CurrentEnvironment)
                 .AddSwaggerGen(c =>
                 {
-                    c.SwaggerDoc("v1", new Info { Title = "Contoso University Api", Version = "v1" });
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Contoso University Api", Version = "v1" });
                 });
 
             services.AddCustomizedApiAuthentication(Configuration);

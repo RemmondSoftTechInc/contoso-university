@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Data.Entities;
 using ContosoUniversity.Common.Interfaces;
 using ContosoUniversity.Common;
+using ContosoUniversity.Common.Extensions;
 using ContosoUniversity.Data.DbContexts;
 using Microsoft.AspNetCore.Authorization;
 
@@ -60,11 +61,11 @@ namespace ContosoUniversity.Web.Controllers
 
             if (descending)
             {
-                students = students.OrderByDescending(e => e.GetType().GetProperty(sortOrder).GetValue(e, null));
+                students = students.OrderByDescending(sortOrder);
             }
             else
             {
-                students = students.OrderBy(e => e.GetType().GetProperty(sortOrder).GetValue(e, null));
+                students = students.OrderBy(sortOrder);
             }
 
             int pageSize = 3;

@@ -40,7 +40,7 @@ namespace ContosoUniversity.Web.Pages
                     {
                         dbSchema = string.Empty;
                     }
-                    string query = $"SELECT EnrollmentDate, COUNT(*) AS StudentCount FROM {dbSchema}Person WHERE Discriminator = 'Student' GROUP BY EnrollmentDate";
+                    string query = $"SELECT EnrollmentDate, COUNT(*) AS StudentCount FROM {dbSchema}Student GROUP BY EnrollmentDate";
                     command.CommandText = query;
                     DbDataReader reader = await command.ExecuteReaderAsync();
                     if (reader.HasRows)
