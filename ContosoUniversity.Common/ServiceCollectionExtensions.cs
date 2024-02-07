@@ -65,7 +65,7 @@ namespace ContosoUniversity.Common
             }
 
             services.AddScoped<UnitOfWork<ApplicationContext>, UnitOfWork<ApplicationContext>>();
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<,>));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.Configure<SampleData>(configuration.GetSection("SampleData"));
 

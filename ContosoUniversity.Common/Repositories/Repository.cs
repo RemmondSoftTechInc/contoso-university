@@ -8,9 +8,9 @@ using ContosoUniversity.Data.DbContexts;
 
 namespace ContosoUniversity.Data
 {
-    public class Repository<T, TContext> : IRepository<T> where T : BaseEntity where TContext : DbContext
+    public class Repository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly TContext context;
+        private readonly DbContext context;
         private DbSet<T> entities;
         string errorMessage = string.Empty;
 
@@ -18,7 +18,7 @@ namespace ContosoUniversity.Data
         {
         }
 
-        public Repository(TContext context)
+        public Repository(DbContext context)
         {
             this.context = context;
             entities = context.Set<T>();

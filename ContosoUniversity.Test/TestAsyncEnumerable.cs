@@ -49,7 +49,12 @@ namespace ContosoUniversity.Tests
 
         TResult IAsyncQueryProvider.ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
         {
-            return Execute<TResult>(expression);
+            var expectedResultType = typeof(TResult).GetGenericArguments()[0];
+            var executionResult = ((IQueryProvider)this).Execute(expression);
+
+            return (TResult)typeof(Task).GetMethod(nameof(Task.FromResult))
+                .MakeGenericMethod(expectedResultType)
+                .Invoke(null, new[] { executionResult });
         }
     }
 
@@ -113,7 +118,8 @@ namespace ContosoUniversity.Tests
 
         public ValueTask DisposeAsync()
         {
-            throw new System.NotImplementedException();
+            _inner.Dispose();
+            return ValueTask.CompletedTask;
         }
     }
 }
