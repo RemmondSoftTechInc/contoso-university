@@ -9,22 +9,24 @@ using ContosoUniversity.Web.Helpers;
 using ContosoUniversity.Common.Data;
 using ContosoUniversity.Common.Interfaces;
 using AutoMapper;
+using Microsoft.Extensions.Hosting;
 
 namespace ContosoUniversity
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env, IConfiguration config)
+        public Startup(IWebHostEnvironment env, IConfiguration config)
         {
             CurrentEnvironment = env;
             Configuration = config;
         }
 
         public IConfiguration Configuration { get; }
-        public IHostingEnvironment CurrentEnvironment { get; }
+        public IWebHostEnvironment CurrentEnvironment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddCustomizedContext(Configuration, CurrentEnvironment);
             services.AddCustomizedIdentity(Configuration, CurrentEnvironment);
             services.AddCustomizedAuthentication(Configuration);
@@ -49,7 +51,7 @@ namespace ContosoUniversity
         }
 
         public void Configure(IApplicationBuilder app,
-            IHostingEnvironment env,
+            IWebHostEnvironment env,
             ILoggerFactory loggerFactory,
             IDbInitializer dbInitializer)
         {

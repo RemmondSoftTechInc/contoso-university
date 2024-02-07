@@ -10,15 +10,16 @@ using ContosoUniversity.Common.Interfaces;
 using Swashbuckle.AspNetCore.Swagger;
 using AutoMapper;
 using ContosoUniversity.Data.DbContexts;
+using Microsoft.Extensions.Hosting;
 
 namespace ContosoUniversity.Api
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        public IHostingEnvironment CurrentEnvironment { get; }
+        public IWebHostEnvironment CurrentEnvironment { get; }
 
-        public Startup(IHostingEnvironment env, IConfiguration config)
+        public Startup(IWebHostEnvironment env, IConfiguration config)
         {
             CurrentEnvironment = env;
             Configuration = config;
@@ -26,6 +27,7 @@ namespace ContosoUniversity.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc(services => services.EnableEndpointRouting = false);
             services.AddCustomizedContext(Configuration, CurrentEnvironment)
                 .AddAutoMapper(cfg =>
                 {
