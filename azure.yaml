@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: contoso-university2
+metadata:
+    template: azd-init@1.5.1
+services:
+    ContosoUniversity.Api:
+        project: ContosoUniversity.Api
+        host: containerapp
+        language: dotnet
+    ContosoUniversity.Spa.React:
+        project: ContosoUniversity.Spa.React
+        host: containerapp
+        language: dotnet
