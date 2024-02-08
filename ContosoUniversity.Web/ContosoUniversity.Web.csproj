@@ -6,6 +6,9 @@
     <UserSecretsId>494868df-30c3-4e9e-8fea-5db093fcb63f</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="appsettings.Release.json" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Properties\PublishProfiles\Azure.pubxml" />
   </ItemGroup>
   <ItemGroup>
@@ -32,10 +35,21 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="appsettings.Release.json">
+      <IsTransformFile>true</IsTransformFile>
+      <DependentUpon>appsettings.json</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\ContosoUniversity.Common\ContosoUniversity.Common.csproj" />
     <ProjectReference Include="..\ContosoUniversity.Data\ContosoUniversity.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="appsettings*.json" CopyToPublishDirectory="Never" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <TransformOnBuild>true</TransformOnBuild>
+    </Content>
   </ItemGroup>
 </Project>

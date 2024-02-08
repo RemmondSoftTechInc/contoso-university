@@ -48,19 +48,22 @@ namespace ContosoUniversity.Common
                 }
                 else
                 {
+                    var connectionString = configuration.GetConnectionString(env.IsDevelopment() 
+                        ? "DefaultConnection" 
+                        : "AZURE_SQL_CONNECTIONSTRING");
+
                     services.AddDbContext<ApplicationContext>(
                         options => options.UseSqlServer(
-                            configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsHistoryTable("Migration", "Contoso")));
-
+                            connectionString, x => x.MigrationsHistoryTable("Migration", "Contoso")));
                     services.AddDbContext<SecureApplicationContext>(
                         options => options.UseSqlServer(
-                            configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsHistoryTable("IdentityMigration", "Contoso")));
+                            connectionString, x => x.MigrationsHistoryTable("IdentityMigration", "Contoso")));
                     services.AddDbContext<WebContext>(
                         options => options.UseSqlServer(
-                            configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsHistoryTable("IdentityMigration", "Contoso")));
+                            connectionString, x => x.MigrationsHistoryTable("IdentityMigration", "Contoso")));
                     services.AddDbContext<ApiContext>(
                         options => options.UseSqlServer(
-                            configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsHistoryTable("IdentityMigration", "Contoso")));
+                            connectionString, x => x.MigrationsHistoryTable("IdentityMigration", "Contoso")));
                 }
             }
 
